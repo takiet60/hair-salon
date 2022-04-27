@@ -1,0 +1,27 @@
+<div class="login-container">
+    <header class="login__header">
+        <div class="login__header--left">
+            <img src="assets/images/cover.png" alt="">
+            <h2>DKH helps you connect and share with the people in your life.</h2>
+        </div>
+        <div class="login__header--right">
+            <mat-card class="login__header--right__card">
+                <mat-card-content class="login__header--right__card__content">
+                    <form #form="ngForm" class="login-form" (ngSubmit)="login(form)">
+                        <input type="text" name="email" ngModel placeholder="Enter your email or phone number" required>
+                        <input type="password" name="password" ngModel placeholder="Password" required>
+                        <button type="submit" class="login-button" [disabled]="form.invalid || form.pending">Log
+                            in</button>
+                    </form>
+                    <a href="#">Fogotten account?</a>
+                    <button class="create-account" (click)="openRegister()">Create New Account</button>
+                </mat-card-content>
+            </mat-card>
+            <p class="tagline"><strong>Create a Page</strong> for a celebrity, band or business.</p>
+        </div>
+    </header>
+
+    <footer class="login__footer">
+        <img src="assets/images/footer.jpg" alt="footer">
+    </footer>
+</div>
