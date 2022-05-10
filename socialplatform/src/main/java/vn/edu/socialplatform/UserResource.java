@@ -31,9 +31,15 @@ public class UserResource {
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
 	
-	@GetMapping("/find/{id}")
+	@GetMapping("/findById/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
 		User user = userService.findUserById(id);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
+	@GetMapping("/findByEmail/{email}")
+	public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
+		User user = userService.findUserByEmail(email);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	
