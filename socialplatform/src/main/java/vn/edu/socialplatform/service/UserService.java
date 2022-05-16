@@ -4,6 +4,9 @@ package vn.edu.socialplatform.service;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,9 @@ public class UserService {
 	
 	private final UserRepo userRepo;
 	
+	@PersistenceContext
+	private EntityManager em;
+		
 	@Autowired
 	public UserService(UserRepo userRepo) {
 		this.userRepo = userRepo;
@@ -43,8 +49,10 @@ public class UserService {
 		userRepo.deleteUserById(id);
 	}
 
-	public User findUserByEmail(String email) {
-		return userRepo.findUserByEmail(email)
+	public User findByEmail(String email) {
+//		return (User) em.createQuery("FROM user u WHERE u.email = :email").setParameter("email", email);
+		
+		return userRepo.findByEmail(email)
 				.orElseThrow(() -> new UserNotFoundException("User by email: " + email + " was not found!"));
 	}
 

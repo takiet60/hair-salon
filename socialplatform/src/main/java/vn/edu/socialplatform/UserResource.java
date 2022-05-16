@@ -39,7 +39,7 @@ public class UserResource {
 	
 	@GetMapping("/findByEmail/{email}")
 	public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
-		User user = userService.findUserByEmail(email);
+		User user = userService.findByEmail(email);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	
