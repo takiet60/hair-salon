@@ -4,12 +4,21 @@ import { LoginComponent } from './components/login/login.component';
 import { FacebookGuard } from './guards/facebook.guard';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import {WatchComponent} from "./components/watch/watch.component";
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     canActivate: [FacebookGuard]
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'watch',
+    component: WatchComponent
   },
   {
     path: 'login', component: LoginComponent
