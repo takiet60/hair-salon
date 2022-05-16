@@ -4,14 +4,28 @@
             <img src="assets/images/cover.png" alt="">
             <h2>DKH helps you connect and share with the people in your life.</h2>
         </div>
+<!--      <div class="login__header&#45;&#45;right">-->
+<!--        <mat-card class="login__header&#45;&#45;right__card">-->
+<!--          <mat-card-content class="login__header&#45;&#45;right__card__content">-->
+<!--            <form #form="ngForm" class="login-form" (ngSubmit)="login(form)">-->
+<!--              <input type="text" name="email" ngModel  [(ngModel)]="email" placeholder="Enter your email or phone number" required>-->
+<!--              <input type="password" name="password"  [(ngModel)]="password" ngModel placeholder="Password" required>-->
+<!--              <button type="submit" class="login-button" (click)="checkUser(email,password)"  [disabled]="form.invalid || form.pending">Log-->
+<!--                in</button>-->
+<!--            </form>-->
+<!--            <a href="#">Fogotten account?</a>-->
+<!--            <button class="create-account" (click)="openRegister()">Create New Account</button>-->
+<!--          </mat-card-content>-->
+<!--        </mat-card>-->
+<!--        <p class="tagline"><strong>Create a Page</strong> for a celebrity, band or business.</p>-->
+<!--      </div>-->
         <div class="login__header--right">
             <mat-card class="login__header--right__card">
                 <mat-card-content class="login__header--right__card__content">
-                    <form #form="ngForm" class="login-form" (ngSubmit)="login(form)">
-                        <input type="text" name="email" ngModel placeholder="Enter your email or phone number" required>
-                        <input type="password" name="password" ngModel placeholder="Password" required>
-                        <button type="submit" class="login-button" [disabled]="form.invalid || form.pending">Log
-                            in</button>
+                    <form  class="login-form" >
+                        <input type="text" name="email"  [(ngModel)]="email" placeholder="Enter your email" >
+                        <input type="password" name="password"  [(ngModel)]="password"  placeholder="Enter your password" >
+                        <input type="submit" class="login-button" (click)="checkUser(email,password)"  value="Login">
                     </form>
                     <a href="#">Fogotten account?</a>
                     <button class="create-account" (click)="openRegister()">Create New Account</button>
