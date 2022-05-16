@@ -2,10 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+<<<<<<< HEAD
 import { RegisterComponent } from '../register/register.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from "@angular/router";
+=======
+
+import { RegisterComponent } from '../register/register.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+import { HttpErrorResponse } from '@angular/common/http';
+import {Router} from "@angular/router";
+
+>>>>>>> 516befd723add2101935f01dc61838cb2b6d450d
 
 @Component({
   selector: 'app-login',
@@ -18,9 +28,16 @@ export class LoginComponent implements OnInit {
   email: any;
   password: any;
 
+<<<<<<< HEAD
   constructor(private userService: UserService,
     private matDialog: MatDialog,
     private router: Router) { }
+=======
+
+  constructor(private userService: UserService,
+    private matDialog: MatDialog,private router: Router) { }
+
+>>>>>>> 516befd723add2101935f01dc61838cb2b6d450d
 
   ngOnInit(): void {
     this.getAllUsers()

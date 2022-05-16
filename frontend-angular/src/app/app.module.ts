@@ -11,8 +11,16 @@ import { MaterialModule } from './shared/material/material.module';
 import { FormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+<<<<<<< HEAD
 import { MatDialogModule } from '@angular/material/dialog';
 import { WatchComponent } from './components/watch/watch.component';
+=======
+
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { WatchComponent } from './components/watch/watch.component';
+
+>>>>>>> 516befd723add2101935f01dc61838cb2b6d450d
 
 @NgModule({
   declarations: [
