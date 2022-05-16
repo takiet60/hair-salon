@@ -11,13 +11,15 @@ import { MaterialModule } from './shared/material/material.module';
 import { FormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { WatchComponent } from './components/watch/watch.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    WatchComponent
   ],
   imports: [
     BrowserModule,
