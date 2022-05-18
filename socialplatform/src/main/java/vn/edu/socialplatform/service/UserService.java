@@ -2,6 +2,7 @@ package vn.edu.socialplatform.service;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
@@ -41,19 +42,19 @@ public class UserService {
 	}
 	
 	public User findUserById(Long id) {
-		return userRepo.findUserById(id)
-				.orElseThrow(() -> new UserNotFoundException("User by id:" + id + " was not found!"));
+		return userRepo.getById(id);
+//				.orElseThrow(() -> new UserNotFoundException("User by id:" + id + " was not found!"));
 	}
 	
 	public void deleteUser(Long id) {
 		userRepo.deleteUserById(id);
 	}
+//		return (User) em.createQuery("FROM user u WHERE u.email = :email").setParameter("email", email);
 
 	public User findByEmail(String email) {
-//		return (User) em.createQuery("FROM user u WHERE u.email = :email").setParameter("email", email);
-		
-		return userRepo.findByEmail(email)
-				.orElseThrow(() -> new UserNotFoundException("User by email: " + email + " was not found!"));
+		Optional<User> user = Optional.ofNullable(userRepo.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User by email:" + email + " was not found!")));;
+		return user.get();
 	}
 
+	
 }
