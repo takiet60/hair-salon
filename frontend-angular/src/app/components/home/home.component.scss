@@ -299,11 +299,11 @@
         display: flex;
         align-items: center;
 
-        form {
+        div {
           flex: 1;
         }
 
-        form>input.on-your-mind {
+        div>button.on-your-mind {
           background-color: #F0F2F5;
           display: inline-block;
           outline: none;
@@ -311,6 +311,12 @@
           padding: 10px 20px;
           border-radius: 20px;
           width: 100%;
+          text-align: left;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #828898;
+          }
         }
       }
 

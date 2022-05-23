@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +19,19 @@ export class HomeComponent implements OnInit {
     'https://upload.wikimedia.org/wikipedia/commons/9/9a/Swepac_FB_465%2C_RV70%2C_with_passing_lorry.jpg'
   ];
 
-  constructor() { }
+  constructor(private matDialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  openPost() {
+    const dialogRef: MatDialogRef<PostComponent, any> = this.matDialog.open(
+      PostComponent,
+      {
+        role: 'dialog',
+        height: '480px',
+        width: '480px',
+      })
   }
 
   postMessage(form: NgForm) {
