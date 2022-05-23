@@ -126,11 +126,11 @@
                     <mat-card-header class="post-message-header"
                         style="padding-bottom: 20px; border-bottom: 1px solid lightgray;">
                         <img alt="" mat-card-avatar>
-                        <form #form="ngForm" (ngSubmit)="postMessage(form)">
-                            <input class="on-your-mind" name="message" ngModel placeholder="What's on your mind?"
-                                type="text">
-                            <button style="display: none;" type="submit"></button>
-                        </form>
+                        <div>
+                            <button class="on-your-mind" name="message" ngModel placeholder="What's on your mind?"
+                                type="text" (click)="openPost()">What are you thinking?</button>
+
+                        </div>
 
                     </mat-card-header>
                     <mat-card-content class="card-body">

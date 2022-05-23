@@ -13,6 +13,7 @@ import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { WatchComponent } from './components/watch/watch.component';
+import { PostComponent } from './components/post/post.component';
 
 
 
@@ -23,7 +24,8 @@ import { WatchComponent } from './components/watch/watch.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    WatchComponent
+    WatchComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
