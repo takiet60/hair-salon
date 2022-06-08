@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/user';
+import { User, IUser } from '../../models/user';
 import { RegisterComponent } from '../register/register.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from "@angular/router";
+import { UtilService } from '../../services/util.service';
 
 
 
@@ -15,23 +16,68 @@ import { Router } from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  user: any[] = [];
   // public users: User[];
-  email: any;
-  password: any;
+  public email: string
+  public password: string
 
-  constructor(private userService: UserService,
+  public user: IUser = new User(0, '', '', '', '', '', '', '')
+
+  public isEmailValid: boolean
+  public isPasswordValid: boolean
+
+  constructor(
+    private userService: UserService,
     private matDialog: MatDialog,
-    private router: Router) { }
+    private router: Router,
+    private utilService: UtilService
+  ) { }
 
 
 
   ngOnInit(): void {
-    // this.checkUser(this.email,this.password);
   }
 
-  login(form: NgForm): void {
+  login(): void {
+    if (this.isEmailValid && this.isPasswordValid) {
+      this.userService.getUserByEmail(this.email).subscribe(
+        (response: any) => {
+          this.user = response
 
+          this.utilService.saveUserToLocalStorage(this.user)
+          this.router.navigate(['/home'])
+        }
+      )
+    }
+  }
+
+  checkEmail() {
+    this.userService.getUserByEmail(this.email).subscribe(
+      (response: any) => {
+        this.user = response
+
+        if (this.user.email === this.email) {
+          this.isEmailValid = true
+        }
+      },
+      error => {
+        this.isEmailValid = false
+      }
+    )
+  }
+
+  checkPassword() {
+    this.userService.getUserByEmail(this.email).subscribe(
+      (response: any) => {
+        this.user = response
+
+        if (this.user.password === this.password) {
+          this.isPasswordValid = true
+        }
+      },
+      error => {
+        this.isPasswordValid = false
+      }
+    )
   }
 
   openRegister(): void {
@@ -51,19 +97,4 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  public getUserByEmail(email: string): any {
-    this.userService.getUserByEmail(email).subscribe(
-      (response) => {
-        console.log(response)
-      }
-    )
-  }
-
-  public checkUser(email: any, password: any) {
-
-    const user = this.getUserByEmail(email)
-    console.log(user)
-
-
-  }
 }

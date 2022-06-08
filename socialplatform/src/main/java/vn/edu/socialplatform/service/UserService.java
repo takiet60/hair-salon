@@ -52,7 +52,7 @@ public class UserService {
 //		return (User) em.createQuery("FROM user u WHERE u.email = :email").setParameter("email", email);
 
 	public User findByEmail(String email) {
-		Optional<User> user = Optional.ofNullable(userRepo.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User by email:" + email + " was not found!")));;
+		Optional<User> user = Optional.ofNullable(userRepo.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User by email:" + email + " was not found!")));
 		return user.get();
 	}
 
