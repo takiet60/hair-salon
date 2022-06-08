@@ -56,16 +56,48 @@
           flex-direction: column;
           gap: 10px;
 
+
+
+
           input {
             padding: 20px;
             outline: none;
             border: 1px solid lightgray;
             border-radius: 5px;
+            width: 100%;
 
             &::placeholder {
               font-size: 16px;
               font-weight: normal;
             }
+          }
+
+          .login-error {
+            color: red;
+            font-size: 0.825rem;
+            margin-top: 0.125em;
+            display: none;
+          }
+
+          .login-error.show {
+            display: block;
+          }
+
+          .fa-circle-check {
+            display: none;
+          }
+
+          .fa-circle-check.show {
+            color: $success-button-color;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.2rem;
+            display: inline-block;
+          }
+
+          .login-control {
+            position: relative;
           }
 
           .login-button {

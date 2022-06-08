@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 
 @Entity
 public class User implements Serializable {
@@ -22,7 +21,8 @@ public class User implements Serializable {
 	@Column(nullable = false, updatable = false)
 	private long id;
 	
-	private String fullName;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String password;
 	private String phone;
@@ -31,10 +31,14 @@ public class User implements Serializable {
 	@Column(nullable = false, updatable = false)
 	private String userCode;
 
-	public User(long id, String fullName, String email, String password, String phone, String imgUrl, String userCode) {
+	
+
+	public User(long id, String firstName, String lastName, String email, String password, String phone, String imgUrl,
+			String userCode) {
 		super();
 		this.id = id;
-		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.phone = phone;
@@ -54,12 +58,21 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getFullName() {
-		return fullName;
+	
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -102,12 +115,7 @@ public class User implements Serializable {
 		this.userCode = userCode;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", phone="
-				+ phone + ", imgUrl=" + imgUrl + ", userCode=" + userCode + "]";
-	}
-	
+
 	
 	
 }

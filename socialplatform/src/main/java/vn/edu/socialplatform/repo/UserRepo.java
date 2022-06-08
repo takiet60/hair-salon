@@ -12,8 +12,8 @@ public interface UserRepo extends JpaRepository<User, Long>{
 	public void deleteUserById(Long id);
 	public User getById(Long id);
 	
-	
-	
 	@Query(value = "SELECT u FROM User u WHERE u.email IN :email")
 	public Optional<User> findByEmail(String email);
+	
+
 }
