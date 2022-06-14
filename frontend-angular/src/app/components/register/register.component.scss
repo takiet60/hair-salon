@@ -1,3 +1,5 @@
+@use '../../../styles.scss'as *;
+
 .register {
   padding: 0;
 }
@@ -22,6 +24,10 @@
     justify-content: center;
   }
 
+  input {
+    width: 100%;
+  }
+
   .user_name {
     display: flex;
     align-items: center;
@@ -35,7 +41,36 @@
       border-radius: 8px;
       padding: 10px;
       background-color: #F5F6F7;
+      width: 100%;
     }
+  }
+
+  .login-error {
+    color: red;
+    font-size: 0.825rem;
+    margin-top: 0.125em;
+    display: none;
+  }
+
+  .login-error.show {
+    display: block;
+  }
+
+  .fa-circle-check {
+    display: none;
+  }
+
+  .fa-circle-check.show {
+    color: $success-button-color;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.2rem;
+    display: inline-block;
+  }
+
+  .login-control {
+    position: relative;
   }
 
   .email_password {

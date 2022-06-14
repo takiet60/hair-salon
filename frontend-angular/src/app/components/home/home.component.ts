@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PostComponent } from '../post/post.component';
+import { Router } from '@angular/router';
+import { UtilService } from '../../services/util.service';
+import { IUser } from '../../models/user';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +13,11 @@ import { PostComponent } from '../post/post.component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  public userModel: any
+
+  public posts: any
+
 
   images: any[] = [
     'https://images-na.ssl-images-amazon.com/images/I/51DR2KzeGBL._AC_.jpg',
@@ -19,9 +28,20 @@ export class HomeComponent implements OnInit {
     'https://upload.wikimedia.org/wikipedia/commons/9/9a/Swepac_FB_465%2C_RV70%2C_with_passing_lorry.jpg'
   ];
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(private matDialog: MatDialog,
+    private router: Router,
+    private utilService: UtilService,
+    private postService: PostService
+  ) { }
 
   ngOnInit(): void {
+    this.userModel = this.utilService.getUserFromLocalStorage()
+    this.posts = this.postService.getAllPosts().subscribe(
+      (response: any) => {
+        this.posts = response
+        console.log(this.posts)
+      }
+    )
   }
 
   openPost() {
@@ -29,12 +49,18 @@ export class HomeComponent implements OnInit {
       PostComponent,
       {
         role: 'dialog',
-        height: '480px',
+        height: '580px',
         width: '480px',
       })
   }
 
   postMessage(form: NgForm) {
 
+  }
+
+
+  logout() {
+    this.utilService.deleteUserInLocalStorage('user')
+    this.router.navigate(['/login'])
   }
 }

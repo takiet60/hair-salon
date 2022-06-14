@@ -6,12 +6,15 @@
     <mat-icon>close</mat-icon>
     <form #form="ngForm">
         <div class="user-avatar">
-            <img src="" mat-card-avatar alt="">
-            <span class="name">User name</span>
+            <img [src]="userModel.imgUrl" mat-card-avatar alt="">
+            <span class="name">{{ userModel.firstName }} {{ userModel.lastName }} </span>
         </div>
-        <textarea name="" id="" cols="30" rows="10" name="content" ngModel>
+        <textarea name="" id="" cols="30" rows="10" name="content" [(ngModel)]="postModel.content">
             What are you thinking?
         </textarea>
-        <button class="submit" type="submit">Post</button>
+        <p class="img-text">Image URL</p>
+        <input name="imgUrl" type="text" class="img-src" [(ngModel)]="postModel.imgUrl">
+
+        <button class="submit" (click)="createPost()" type="submit">Post</button>
     </form>
 </section>
