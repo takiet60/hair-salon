@@ -15,20 +15,20 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'watch',
-    component: WatchComponent
+    component: WatchComponent,
   },
   {
-    path: 'login', component: LoginComponent
+    path: 'login', component: LoginComponent,
   },
   {
-    path: 'register', component: RegisterComponent
+    path: 'register', component: RegisterComponent,
   },
   {
-    path: 'post', component: PostComponent
+    path: 'post', component: PostComponent,
   }
 ];
 

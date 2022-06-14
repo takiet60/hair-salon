@@ -11,4 +11,12 @@ export class UtilService {
   public saveUserToLocalStorage(user: IUser) {
     localStorage.setItem('user', JSON.stringify(user))
   }
+
+  public getUserFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('user')) || {};
+  }
+
+  public deleteUserInLocalStorage(key: string) {
+    localStorage.removeItem(key)
+  }
 }

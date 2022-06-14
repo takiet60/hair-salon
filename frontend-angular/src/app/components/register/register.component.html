@@ -7,21 +7,27 @@
     <div class="body">
         <form #form="ngForm">
             <div class="user_name">
-                <input type="text" placeholder="FirstName" name="fname" ngModel>
-                <input type="text" placeholder="LastName" name="lname" ngModel>
+                <input type="text" placeholder="FirstName" name="fname" [(ngModel)]="userModel.firstName">
+                <input type="text" placeholder="LastName" name="lname" [(ngModel)]="userModel.lastName">
             </div>
 
             <div class="email_password">
-                <input type="email" placeholder="Email" name="email" ngModel>
-                <input type="text" placeholder="Image URL" name="avatar" ngModel>
-                <input type="password" placeholder="Password" name="password" ngModel>
+                <div class="login-control">
+                    <input type="email" placeholder="Email" name="email" (change)="checkIsValidEmail()"
+                        [(ngModel)]="userModel.email">
+                    <i class="fa-solid fa-circle-check" [ngClass]="{'show': isValidEmail===false}"></i>
+                    <span class="login-error" [ngClass]="{'show': isValidEmail===true}">Email is already exist</span>
+                </div>
+                <input type="text" placeholder="Image URL" name="avatar" [(ngModel)]="userModel.imgUrl">
+                <input type="password" placeholder="Password" name="password" [(ngModel)]="userModel.password">
             </div>
 
             <p>By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. You may receive SMS
                 notifications from us
                 and can opt out at any time.</p>
 
-            <button type="submit" class="submit-button" [mat-dialog-close]="form.value">Sign Up</button>
+            <button type="submit" class="submit-button" (click)="handleRegister()" [mat-dialog-close]="form.value">Sign
+                Up</button>
         </form>
     </div>
 </section>
