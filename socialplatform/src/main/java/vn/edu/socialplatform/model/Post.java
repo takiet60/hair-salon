@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="post") 
 public class Post implements Serializable{
 
 	/**
@@ -22,15 +24,17 @@ public class Post implements Serializable{
 	@Column(nullable = false, updatable = false)
 	private long id;
 	private long userId;
+	private int likes;
 	private String userName;
 	private String userImgUrl;
 	private String content;
 	private String imgUrl;
 	private String time;
-	public Post(long id, long userId, String userName, String userImgUrl, String content, String imgUrl, String time) {
+	public Post(long id, long userId, int likes, String userName, String userImgUrl, String content, String imgUrl, String time) {
 		super();
 		this.id = id;
 		this.userId = userId;
+		this.likes = likes;
 		this.userName = userName;
 		this.userImgUrl = userImgUrl;
 		this.content = content;
@@ -79,6 +83,12 @@ public class Post implements Serializable{
 	public String getTime() {
 		return time;
 	}
+//	public long getLike() {
+//		return like;
+//	}
+//	public void setLike(long like) {
+//		this.like = like;
+//	}
 	public void setTime(String time) {
 		this.time = time;
 	}

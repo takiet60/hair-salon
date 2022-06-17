@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   public userModel: any
 
   public posts: any
+  public temp: any
 
 
   images: any[] = [
@@ -38,8 +39,8 @@ export class HomeComponent implements OnInit {
     this.userModel = this.utilService.getUserFromLocalStorage()
     this.posts = this.postService.getAllPosts().subscribe(
       (response: any) => {
-        this.posts = response
-        console.log(this.posts)
+        this.temp = response
+        this.posts = this.temp.reverse()
       }
     )
   }
@@ -54,10 +55,10 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  postMessage(form: NgForm) {
+
+  updateLikes(id: any) {
 
   }
-
 
   logout() {
     this.utilService.deleteUserInLocalStorage('user')

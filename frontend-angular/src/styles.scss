@@ -38,3 +38,21 @@ app-login {
   display: block;
   width: 100%;
 }
+
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+
+.avatar {
+  border-radius: 50%;
+
+  &--small {
+    width: 30px;
+    height: 30px;
+  }
+}
