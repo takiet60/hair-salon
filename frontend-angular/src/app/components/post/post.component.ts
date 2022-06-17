@@ -35,8 +35,8 @@ export class PostComponent implements OnInit {
     this.postModel.userImgUrl = this.userModel.imgUrl
     this.postService.addPost(this.postModel).subscribe(
       response => {
-        console.log(response)
         this.matDialog.closeAll()
+        window.location.reload()
       }
     )
   }
