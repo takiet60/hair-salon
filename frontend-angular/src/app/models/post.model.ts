@@ -16,8 +16,10 @@ export class Post implements IPost {
     content: string
     imgUrl: string
     time: string
+    likes: number
 
-    constructor(id: number, userId: number, userName: string, userImgUrl: string, content: string, imgUrl: string, time: string) {
+    constructor(id: number, userId: number, userName: string, userImgUrl: string,
+        content: string, imgUrl: string, time: string, likes: number) {
         this.id = id
         this.userId = userId
         this.userName = userName
@@ -25,5 +27,6 @@ export class Post implements IPost {
         this.content = content
         this.imgUrl = imgUrl
         this.time = time
+        this.likes = likes
     }
 }

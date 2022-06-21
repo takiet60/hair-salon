@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { UtilService } from '../../services/util.service';
 import { IUser } from '../../models/user';
 import { PostService } from '../../services/post.service';
+import { Comment, IComment } from '../../models/comment.model';
+import { createHostListener } from '@angular/compiler/src/core';
+import { CommentService } from '../../services/comment.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +21,10 @@ export class HomeComponent implements OnInit {
 
   public posts: any
   public temp: any
+  public isActive: boolean = false
+  public isCommentActive: boolean = false
+  public commentModel: IComment = new Comment(0, 0, 0, '', '', '')
+  public comments: IComment[]
 
 
   images: any[] = [
@@ -32,17 +39,13 @@ export class HomeComponent implements OnInit {
   constructor(private matDialog: MatDialog,
     private router: Router,
     private utilService: UtilService,
-    private postService: PostService
+    private postService: PostService,
+    private commentService: CommentService
   ) { }
 
   ngOnInit(): void {
     this.userModel = this.utilService.getUserFromLocalStorage()
-    this.posts = this.postService.getAllPosts().subscribe(
-      (response: any) => {
-        this.temp = response
-        this.posts = this.temp.reverse()
-      }
-    )
+    this.showTopics()
   }
 
   openPost() {
@@ -55,9 +58,50 @@ export class HomeComponent implements OnInit {
       })
   }
 
+  showTopics() {
+    this.posts = this.postService.getAllPosts().subscribe(
+      (response: any) => {
+        this.temp = response
+        this.posts = this.temp.reverse()
+      }
+    )
+  }
 
-  updateLikes(id: any) {
+  showComments() {
+    this.isCommentActive = !this.isCommentActive
+  }
 
+  updateLikes(likes: number, id: any, p: any) {
+
+    this.postService.updateLikes(++likes, id, p).subscribe(
+      (response) => {
+      }
+    )
+    this.isActive = true
+  }
+
+
+  addComment(postId) {
+    console.log(postId)
+    this.commentModel.postId = postId
+    this.commentModel.userId = this.userModel.id
+    this.commentModel.userImgUrl = this.userModel.imgUrl
+    this.commentModel.time = this.utilService.getTimeNow()
+    this.commentService.addComment(this.commentModel).subscribe(
+      (response) => {
+        this.commentModel.content = ''
+        this.getCommentsByPostId(postId)
+      }
+    )
+  }
+
+  getCommentsByPostId(postId: number) {
+    this.commentService.getCommentsByPostId(postId).subscribe(
+      (response: any) => {
+        this.comments = response
+        console.log(this.comments)
+      }
+    )
   }
 
   logout() {

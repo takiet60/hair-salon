@@ -83,12 +83,12 @@ public class Post implements Serializable{
 	public String getTime() {
 		return time;
 	}
-//	public long getLike() {
-//		return like;
-//	}
-//	public void setLike(long like) {
-//		this.like = like;
-//	}
+	public long getLikes() {
+		return likes;
+	}
+	public void setLike(int likes) {
+		this.likes = likes;
+	}
 	public void setTime(String time) {
 		this.time = time;
 	}

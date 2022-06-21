@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class PostComponent implements OnInit {
 
   public userModel: any
-  public postModel: IPost = new Post(0, 0, '', '', '', '', '')
+  public postModel: IPost = new Post(0, 0, '', '', '', '', '', 0)
 
   constructor(
     private utilService: UtilService,

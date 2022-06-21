@@ -24,4 +24,7 @@ public class PostService {
 		return postRepo.findAll();
 	}
 	
+	public void updateLikes(int likes, long id) {
+		postRepo.updateLikes(likes, id);
+	}
 }

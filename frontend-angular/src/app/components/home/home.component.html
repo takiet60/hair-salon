@@ -166,7 +166,8 @@
                         <div class="posts__interact">
                             <div class="posts__like">
                                 <mat-icon>thumb_up</mat-icon>
-                                <span>1</span>
+                                <span *ngIf="isActive">{{ p?.likes + 1 }}</span>
+                                <span *ngIf="!isActive">{{ p?.likes }}</span>
                             </div>
                             <div class="posts__comment">
                                 <mat-icon> comment</mat-icon>
@@ -175,46 +176,32 @@
                         </div>
                     </mat-card-content>
                     <mat-card-actions class="posts__actions">
-                        <button class="posts__action posts__like" (click)="updateLikes(p?.id)">
+                        <button class="posts__action posts__like" [id]="p?.id" [class.active]="isActive === true"
+                            (click)="updateLikes(p?.likes, p?.id, p)">
                             <mat-icon>thumb_up</mat-icon>
                             <span>Like</span>
                         </button>
-                        <button class="posts__action posts__comment">
+                        <button class="posts__action posts__comment" (click)="showComments()"
+                            (click)="getCommentsByPostId(p?.id)">
                             <mat-icon> comment</mat-icon>
                             <span>Comment</span>
                         </button>
                     </mat-card-actions>
 
-                    <mat-card-footer class="comment">
-                        <div class="comment__input-control">
+                    <mat-card-footer class="comment" [class.active]="isCommentActive">
+                        <form class="comment__input-control" (submit)="addComment(p?.id)">
                             <img [src]=userModel.imgUrl alt="" class="comment__input-avatar">
                             <input type="text" name="comment" placeholder="Enter your comment"
-                                class="comment__input-comment">
-                        </div>
-                        <div class="comments">
-                            <img [src]=userModel.imgUrl alt="" class="avatar avatar--small">
+                                [(ngModel)]="commentModel.content" class="comment__input-comment">
+                        </form>
+                        <div class="comments" *ngFor="let comment of comments">
+                            <img [src]=comment?.userImgUrl alt="" class="avatar avatar--small">
                             <div class="comment__info">
                                 <div class="comment__name">Anh Kiệt</div>
-                                <div class="comment__text">Xin chào các bạn</div>
+                                <div class="comment__text">{{comment?.content}}</div>
                             </div>
                         </div>
-                        <div class="comments">
-                            <img [src]=userModel.imgUrl alt="" class="avatar avatar--small">
-                            <div class="comment__info">
-                                <div class="comment__name">Anh Kiệt</div>
-                                <div class="comment__text">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Repellat, quaerat?</div>
-                            </div>
-                        </div>
-                        <div class="comments">
-                            <img [src]=userModel.imgUrl alt="" class="avatar avatar--small">
-                            <div class="comment__info">
-                                <div class="comment__name">Anh Kiệt</div>
-                                <div class="comment__text">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Commodi odio quaerat eos, et quibusdam accusamus labore nisi itaque laboriosam
-                                    maiores?</div>
-                            </div>
-                        </div>
+
                     </mat-card-footer>
                 </mat-card>
 
@@ -228,7 +215,64 @@
         <!-- home body feed right -->
         <div class="home__body__feedRight">
             <div class="inside">
-                <img src="assets/images/feed.jpg" alt="feed">
+                <h1>Friends</h1>
+                <div class="users__container">
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+
+                </div>
+                <h1>Celebrities</h1>
+                <div class="users__container">
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
