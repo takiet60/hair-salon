@@ -1,0 +1,218 @@
+<main class="profile">
+    <div class="home__header">
+        <div class="home__header-left">
+            <img src="assets/images/cover.png" alt="logo" mat-card-avatar>
+            <div class="input">
+                <mat-icon class="search-icon">search</mat-icon>
+                <form>
+                    <input type="text" placeholder="Search...">
+                </form>
+            </div>
+        </div>
+        <div class="home__header-middle">
+            <div class="active">
+                <mat-icon>home</mat-icon>
+            </div>
+            <div>
+                <mat-icon>ondemand_video</mat-icon>
+            </div>
+            <div>
+                <mat-icon>store</mat-icon>
+            </div>
+            <div>
+                <mat-icon>group</mat-icon>
+            </div>
+            <div>
+                <mat-icon>flag</mat-icon>
+            </div>
+        </div>
+        <div class="home__header-right">
+            <!-- <div>
+                <img [src]=userModel.imgUrl alt="avatar" class="" mat-card-avatar>
+                <span>{{userModel.firstName}} {{userModel.lastName}}</span>
+            </div> -->
+            <div>
+                <mat-icon>add</mat-icon>
+            </div>
+
+            <div>
+                <mat-icon matBadge="4" matBadgeColor="warn" matBadgeOverlap="false" matBadgePosition="above after">
+                    forum</mat-icon>
+            </div>
+
+            <div>
+                <mat-icon matBadge="3" matBadgeColor="warn" matBadgeOverlap="false" matBadgePosition="above after">
+                    notifications
+                </mat-icon>
+            </div>
+
+        </div>
+
+        <mat-icon [matMenuTriggerFor]="menu">
+            expand_more
+        </mat-icon>
+        <mat-menu #menu="matMenu">
+            <!-- <button mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>Log out
+            </button> -->
+        </mat-menu>
+    </div>
+
+    <!-- Main container -->
+    <main class="container">
+
+        <!-- Banner background section  -->
+        <section class="banner">
+            <img class="banner__img" src="../../../assets/images/background.jpeg" alt="back ground">
+            <button class="btn banner__btn">
+                <mat-icon>photo_camera</mat-icon>
+                Edit banner
+            </button>
+        </section>
+
+        <section class="info">
+            <img src="../../../assets/images/user.png" alt="user" class="info__img">
+            <div class="info__info">
+                <h1>Anh Kiệt</h1>
+                <p>32 friends</p>
+            </div>
+            <div class="info__actions">
+                <button class="btn">Add new post</button>
+                <button class="btn">Edit info</button>
+            </div>
+        </section>
+
+        <section class="actions">
+            <span class="actions__action active">Posts</span>
+            <span class="actions__action">Introduction</span>
+            <span class="actions__action">Friends</span>
+            <span class="actions__action">Pictures</span>
+            <span class="actions__action">Videos</span>
+            <span class="actions__action">Check in</span>
+            <span class="actions__action">More</span>
+        </section>
+
+        <!-- End Banner background section  -->
+
+        <main class="body">
+            <div class="aside--left">
+                <mat-card class="aside aside__intro">
+                    <h4>Introduction</h4>
+                    <p>Google Engineer</p>
+                    <p>Data Sciene</p>
+                </mat-card>
+                <mat-card class="aside aside__pictures">
+                    <p>Picture</p>
+                    <div class="pictures-container">
+                        <img src="../../../assets/images/cover.png" class="aside__picture" alt="">
+                        <img src="../../../assets/images/cover.png" class="aside__picture" alt="">
+                        <img src="../../../assets/images/cover.png" class="aside__picture" alt="">
+                        <img src="../../../assets/images/cover.png" class="aside__picture" alt="">
+                        <img src="../../../assets/images/cover.png" class="aside__picture" alt="">
+                        <img src="../../../assets/images/cover.png" class="aside__picture" alt="">
+                        <img src="../../../assets/images/cover.png" class="aside__picture" alt="">
+                        <img src="../../../assets/images/cover.png" class="aside__picture" alt="">
+                    </div>
+                </mat-card>
+            </div>
+            <!-- home body center -->
+
+            <div class="home__body__contentMiddle">
+
+
+
+                <div class="home__body__contentMiddle-center">
+                    <mat-card class="post-message">
+                        <mat-card-header class="post-message-header"
+                            style="padding-bottom: 20px; border-bottom: 1px solid lightgray;">
+                            <img alt="" mat-card-avatar>
+                            <div>
+                                <button class="on-your-mind" name="message" ngModel placeholder="What's on your mind?"
+                                    type="text" (click)="openPost()">What are you thinking?</button>
+
+                            </div>
+
+                        </mat-card-header>
+                        <mat-card-content class="card-body">
+                            <div>
+                                <mat-icon color="accent">videocam</mat-icon>
+                                <span>Live Video</span>
+                            </div>
+
+                            <div>
+                                <mat-icon color="primary">photo_album</mat-icon>
+                                <span>Photo/Video</span>
+                            </div>
+
+                            <div>
+                                <mat-icon color="warn">mood</mat-icon>
+                                <span>Feeling/Activity</span>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <!--Loop Through All Posts From Database and Display-->
+                    <mat-card *ngFor="let p of posts" class="posts">
+                        <mat-card-header class="posts__header flex align-center">
+                            <img [alt]="p.userName" mat-card-avatar [src]="p?.userImgUrl">
+                            <div class="posts__header__right">
+                                <span>{{ p?.time }}</span>
+                                <h3>{{ p?.userName }}</h3>
+                            </div>
+                        </mat-card-header>
+                        <mat-card-content class="posts__body">
+                            <img [src]="p?.imgUrl" alt="" class="posts__img">
+                            <p>{{ p?.content }}</p>
+                            <div class="posts__interact">
+                                <div class="posts__like">
+                                    <mat-icon>thumb_up</mat-icon>
+                                    <span *ngIf="isActive">{{ p?.likes + 1 }}</span>
+                                    <span *ngIf="!isActive">{{ p?.likes }}</span>
+                                </div>
+                                <div class="posts__comment">
+                                    <mat-icon> comment</mat-icon>
+                                    <span>0</span>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions class="posts__actions">
+                            <button class="posts__action posts__like" [id]="p?.id" [class.active]="isActive === true"
+                                (click)="updateLikes(p?.likes, p?.id, p)">
+                                <mat-icon>thumb_up</mat-icon>
+                                <span>Like</span>
+                            </button>
+                            <button class="posts__action posts__comment" (click)="showComments()"
+                                (click)="getCommentsByPostId(p?.id)">
+                                <mat-icon> comment</mat-icon>
+                                <span>Comment</span>
+                            </button>
+                        </mat-card-actions>
+
+                        <mat-card-footer class="comment" [class.active]="isCommentActive">
+                            <form class="comment__input-control" (submit)="addComment(p?.id)">
+                                <img [src]=userModel.imgUrl alt="" class="comment__input-avatar">
+                                <input type="text" name="comment" placeholder="Enter your comment"
+                                    [(ngModel)]="commentModel.content" class="comment__input-comment">
+                            </form>
+                            <div class="comments" *ngFor="let comment of comments">
+                                <img [src]=comment?.userImgUrl alt="" class="avatar avatar--small">
+                                <div class="comment__info">
+                                    <div class="comment__name">Anh Kiệt</div>
+                                    <div class="comment__text">{{comment?.content}}</div>
+                                </div>
+                            </div>
+
+                        </mat-card-footer>
+                    </mat-card>
+
+
+                </div>
+
+
+            </div>
+        </main>
+    </main>
+
+    <!-- End Main container -->
+
+</main>
