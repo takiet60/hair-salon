@@ -25,4 +25,7 @@ export class PostService {
     return this.httpClient.patch<IPost>(`${this.apiUrl}/updateLikes?likes=${likes}&id=${id}`, post);
   }
 
+  public getPostsByUserId(userId): Observable<IPost[]> {
+    return this.httpClient.get<IPost[]>(`${this.apiUrl}/getByUserId?userId=${userId}`)
+  }
 }

@@ -18,7 +18,7 @@ export class UserService {
   }
 
   public getUserById(userId: number): Observable<User> {
-    return this.http.get<User>(`${this.apiServerUrl}/user/findById/${userId}`)
+    return this.http.get<User>(`${this.apiServerUrl}/user/findById?id=${userId}`)
   }
 
   public getUserByEmail(userEmail: string): Observable<User> {

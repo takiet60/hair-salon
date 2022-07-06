@@ -1,7 +1,7 @@
 <main class="profile">
     <div class="home__header">
         <div class="home__header-left">
-            <img src="assets/images/cover.png" alt="logo" mat-card-avatar>
+            <img (click)="goToHome()" src="assets/images/cover.png" alt="logo" mat-card-avatar>
             <div class="input">
                 <mat-icon class="search-icon">search</mat-icon>
                 <form>
@@ -27,10 +27,10 @@
             </div>
         </div>
         <div class="home__header-right">
-            <!-- <div>
+            <div>
                 <img [src]=userModel.imgUrl alt="avatar" class="" mat-card-avatar>
                 <span>{{userModel.firstName}} {{userModel.lastName}}</span>
-            </div> -->
+            </div>
             <div>
                 <mat-icon>add</mat-icon>
             </div>
@@ -71,9 +71,9 @@
         </section>
 
         <section class="info">
-            <img src="../../../assets/images/user.png" alt="user" class="info__img">
+            <img [src]=userModel.imgUrl alt="user" class="info__img">
             <div class="info__info">
-                <h1>Anh Kiệt</h1>
+                <h1>{{userModel.firstName}} {{userModel.lastName}}</h1>
                 <p>32 friends</p>
             </div>
             <div class="info__actions">

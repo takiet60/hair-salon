@@ -9,6 +9,7 @@ import { PostService } from '../../services/post.service';
 import { Comment, IComment } from '../../models/comment.model';
 import { createHostListener } from '@angular/compiler/src/core';
 import { CommentService } from '../../services/comment.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +19,12 @@ import { CommentService } from '../../services/comment.service';
 export class HomeComponent implements OnInit {
 
   public userModel: any
+  public users: any
 
   public posts: any
+
+  public allPosts: any
+
   public temp: any
   public isActive: boolean = false
   public isCommentActive: boolean = false
@@ -40,12 +45,14 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private utilService: UtilService,
     private postService: PostService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
     this.userModel = this.utilService.getUserFromLocalStorage()
     this.showTopics()
+    this.getAllUsers()
   }
 
   openPost() {
@@ -59,10 +66,11 @@ export class HomeComponent implements OnInit {
   }
 
   showTopics() {
-    this.posts = this.postService.getAllPosts().subscribe(
+    this.postService.getAllPosts().subscribe(
       (response: any) => {
         this.temp = response
-        this.posts = this.temp.reverse()
+        this.allPosts = this.temp.reverse()
+        this.posts = this.allPosts.splice(0, 5)
       }
     )
   }
@@ -102,6 +110,26 @@ export class HomeComponent implements OnInit {
         console.log(this.comments)
       }
     )
+  }
+
+  goToProfile(id) {
+    this.router.navigate(['profile', id]);
+  }
+
+  getAllUsers() {
+    this.userService.getAllUsers().subscribe(
+      (response) => {
+        this.users = response
+        console.log(this.users)
+      }
+    )
+  }
+
+  loadMore() {
+    this.posts = [...this.posts, this.allPosts.splice(0, 5)].reduce(
+      (acc, val) => acc.concat(val), []
+    )
+    console.log(this.posts)
   }
 
   logout() {
