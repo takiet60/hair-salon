@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="home__header-right">
-            <div>
+            <div (click)="goToProfile(userModel.id)">
                 <img [src]=userModel.imgUrl alt="avatar" class="" mat-card-avatar>
                 <span>{{userModel.firstName}} {{userModel.lastName}}</span>
             </div>
@@ -206,8 +206,8 @@
                 </mat-card>
 
 
+                <button class="btn btn--loadmore" (click)="loadMore()">Load more</button>
             </div>
-
 
         </div>
 
@@ -217,31 +217,11 @@
             <div class="inside">
                 <h1>Friends</h1>
                 <div class="users__container">
-                    <div class="user">
-                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
-                            alt="">
-                        <div class="user__name">Trần Văn Đời</div>
+                    <div class="user" *ngFor="let user of users" (click)="goToProfile(user.id)">
+                        <img class="user__img" [src]="user.imgUrl" alt="">
+                        <div class="user__name">{{user.firstName}} {{user.lastName}}</div>
                     </div>
-                    <div class="user">
-                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
-                            alt="">
-                        <div class="user__name">Trần Văn Đời</div>
-                    </div>
-                    <div class="user">
-                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
-                            alt="">
-                        <div class="user__name">Trần Văn Đời</div>
-                    </div>
-                    <div class="user">
-                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
-                            alt="">
-                        <div class="user__name">Trần Văn Đời</div>
-                    </div>
-                    <div class="user">
-                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
-                            alt="">
-                        <div class="user__name">Trần Văn Đời</div>
-                    </div>
+
 
                 </div>
                 <h1>Celebrities</h1>

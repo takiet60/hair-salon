@@ -56,3 +56,26 @@ app-login {
     height: 30px;
   }
 }
+
+
+.btn--loadmore {
+  width: 100%;
+  padding: 1em;
+  font-size: 1;
+  background: $primary-button-color-1;
+  background: linear-gradient(125deg, #{$primary-button-color-1} 0%, #{$primary-button-color-2} 100%);
+  padding: 15px;
+  outline: none;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.btn--loadmore:hover {
+  opacity: 1;
+}

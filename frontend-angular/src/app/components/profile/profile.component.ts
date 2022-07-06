@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PostComponent } from '../post/post.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UtilService } from '../../services/util.service';
 import { IUser } from '../../models/user';
 import { PostService } from '../../services/post.service';
 import { Comment, IComment } from '../../models/comment.model';
 import { createHostListener } from '@angular/compiler/src/core';
 import { CommentService } from '../../services/comment.service';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -17,6 +18,8 @@ import { CommentService } from '../../services/comment.service';
 export class ProfileComponent implements OnInit {
 
   public userModel: any
+
+  private param: string
 
   public posts: any
   public temp: any
@@ -39,12 +42,20 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private utilService: UtilService,
     private postService: PostService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private route: ActivatedRoute,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    this.userModel = this.utilService.getUserFromLocalStorage()
     this.showTopics()
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.param = params['id']
+      }
+    )
+    this.getUserById(this.param)
+    this.getPostsByUserId(this.param)
   }
 
   openPost() {
@@ -103,9 +114,30 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  getUserById(id) {
+    this.userService.getUserById(id).subscribe(
+      (response) => {
+        this.userModel = response
+      }
+    )
+  }
+
+  getPostsByUserId(userId) {
+    this.postService.getPostsByUserId(userId).subscribe(
+      (response) => {
+        this.posts = response
+        console.log(this.posts)
+      }
+    )
+  }
+
   logout() {
     this.utilService.deleteUserInLocalStorage('user')
     this.router.navigate(['/login'])
+  }
+
+  goToHome() {
+    this.router.navigate(['/home'])
   }
 
 }
