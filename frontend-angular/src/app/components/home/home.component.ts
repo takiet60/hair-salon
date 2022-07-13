@@ -132,6 +132,10 @@ export class HomeComponent implements OnInit {
     console.log(this.posts)
   }
 
+  goToEditInfo() {
+    this.router.navigate(['/editInfo'])
+  }
+
   logout() {
     this.utilService.deleteUserInLocalStorage('user')
     this.router.navigate(['/login'])

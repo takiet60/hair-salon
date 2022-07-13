@@ -1,0 +1,279 @@
+<div class="home-container">
+    <div class="home__header">
+        <div class="home__header-left">
+            <img src="assets/images/cover.png" alt="logo" mat-card-avatar>
+            <div class="input">
+                <mat-icon class="search-icon">search</mat-icon>
+                <form>
+                    <input type="text" placeholder="Search...">
+                </form>
+            </div>
+        </div>
+        <div class="home__header-middle">
+            <div class="active">
+                <mat-icon>home</mat-icon>
+            </div>
+            <div>
+                <mat-icon>ondemand_video</mat-icon>
+            </div>
+            <div>
+                <mat-icon>store</mat-icon>
+            </div>
+            <div>
+                <mat-icon>group</mat-icon>
+            </div>
+            <div>
+                <mat-icon>flag</mat-icon>
+            </div>
+        </div>
+        <div class="home__header-right">
+            <div>
+                <img [src]=userModel.imgUrl alt="avatar" class="" mat-card-avatar>
+                <span>{{userModel.firstName}} {{userModel.lastName}}</span>
+            </div>
+            <div>
+                <mat-icon>add</mat-icon>
+            </div>
+
+            <div>
+                <mat-icon matBadge="4" matBadgeColor="warn" matBadgeOverlap="false" matBadgePosition="above after">
+                    forum</mat-icon>
+            </div>
+
+            <div>
+                <mat-icon matBadge="3" matBadgeColor="warn" matBadgeOverlap="false" matBadgePosition="above after">
+                    notifications
+                </mat-icon>
+            </div>
+
+        </div>
+
+        <mat-icon [matMenuTriggerFor]="menu">
+            expand_more
+        </mat-icon>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>Log out
+            </button>
+        </mat-menu>
+    </div>
+    <div class="home__body">
+        <!-- home body feed left -->
+        <div class="home__body__feedLeft">
+            <div class="inside">
+                <div class="user_avatar">
+                    <img src="" mat-card-avatar alt="">
+                    <span class="name">User name</span>
+                </div>
+
+                <div>
+                    <mat-icon>local_hospital
+                    </mat-icon>
+                    <span class="covid">COVID-19 Information Center</span>
+                </div>
+
+                <div>
+                    <mat-icon>flag</mat-icon>
+                    <span>Pages</span>
+                </div>
+
+                <div>
+                    <mat-icon>people</mat-icon>
+                    <span>Friends</span>
+                </div>
+
+                <div>
+                    <mat-icon>chat</mat-icon>
+                    <span>Messenger</span>
+                </div>
+
+                <div>
+                    <mat-icon>store</mat-icon>
+                    <span>Marketplace</span>
+                </div>
+
+                <div>
+                    <mat-icon>video_library</mat-icon>
+                    <span>Videos</span>
+                </div>
+
+                <div>
+                    <mat-icon class="see-more">expand_more</mat-icon>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- home body center -->
+
+        <div class="home__body__contentMiddle">
+
+            <div class="home__body__contentMiddle-top">
+                <!--IMAGE CARDS-->
+                <mat-card *ngFor="let i of images" class="image-card">
+                    <img alt="bg" class="bg" src="{{ i }}">
+                    <mat-card-content>
+                        <img alt="avatar" class="avatar"
+                            src="https://scontent.fdel8-1.fna.fbcdn.net/v/t1.0-1/cp0/p50x50/15078703_10211571832470683_2854551810050518303_n.jpg?_nc_cat=105&_nc_sid=7206a8&_nc_ohc=YSQBDLYrXHgAX_7KBWW&_nc_ht=scontent.fdel8-1.fna&oh=298837f1c1ebe1f884ce2525d31f39b1&oe=5F6F741A">
+                        <span class="card-name">Indranil Mukherjee</span>
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+
+            <div class="home__body__contentMiddle-center">
+                <mat-card class="post-message">
+                    <mat-card-header class="post-message-header"
+                        style="padding-bottom: 20px; border-bottom: 1px solid lightgray;">
+                        <img alt="" mat-card-avatar>
+                        <div>
+                            <button class="on-your-mind" name="message" ngModel placeholder="What's on your mind?"
+                                type="text" (click)="openPost()">What are you thinking?</button>
+
+                        </div>
+
+                    </mat-card-header>
+                    <mat-card-content class="card-body">
+                        <div>
+                            <mat-icon color="accent">videocam</mat-icon>
+                            <span>Live Video</span>
+                        </div>
+
+                        <div>
+                            <mat-icon color="primary">photo_album</mat-icon>
+                            <span>Photo/Video</span>
+                        </div>
+
+                        <div>
+                            <mat-icon color="warn">mood</mat-icon>
+                            <span>Feeling/Activity</span>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <!--Loop Through All Posts From Database and Display-->
+                <mat-card *ngFor="let p of posts" class="posts">
+                    <mat-card-header class="posts__header flex align-center">
+                        <img [alt]="p.userName" mat-card-avatar [src]="p?.userImgUrl">
+                        <div class="posts__header__right">
+                            <span>{{ p?.time }}</span>
+                            <h3>{{ p?.userName }}</h3>
+                        </div>
+                    </mat-card-header>
+                    <mat-card-content class="posts__body">
+                        <img [src]="p?.imgUrl" alt="" class="posts__img">
+                        <p>{{ p?.content }}</p>
+                        <div class="posts__interact">
+                            <div class="posts__like">
+                                <mat-icon>thumb_up</mat-icon>
+                                <span *ngIf="isActive">{{ p?.likes + 1 }}</span>
+                                <span *ngIf="!isActive">{{ p?.likes }}</span>
+                            </div>
+                            <div class="posts__comment">
+                                <mat-icon> comment</mat-icon>
+                                <span>0</span>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions class="posts__actions">
+                        <button class="posts__action posts__like" [id]="p?.id" [class.active]="isActive === true"
+                            (click)="updateLikes(p?.likes, p?.id, p)">
+                            <mat-icon>thumb_up</mat-icon>
+                            <span>Like</span>
+                        </button>
+                        <button class="posts__action posts__comment" (click)="showComments()"
+                            (click)="getCommentsByPostId(p?.id)">
+                            <mat-icon> comment</mat-icon>
+                            <span>Comment</span>
+                        </button>
+                    </mat-card-actions>
+
+                    <mat-card-footer class="comment" [class.active]="isCommentActive">
+                        <form class="comment__input-control" (submit)="addComment(p?.id)">
+                            <img [src]=userModel.imgUrl alt="" class="comment__input-avatar">
+                            <input type="text" name="comment" placeholder="Enter your comment"
+                                [(ngModel)]="commentModel.content" class="comment__input-comment">
+                        </form>
+                        <div class="comments" *ngFor="let comment of comments">
+                            <img [src]=comment?.userImgUrl alt="" class="avatar avatar--small">
+                            <div class="comment__info">
+                                <div class="comment__name">Anh Kiệt</div>
+                                <div class="comment__text">{{comment?.content}}</div>
+                            </div>
+                        </div>
+
+                    </mat-card-footer>
+                </mat-card>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- home body feed right -->
+        <div class="home__body__feedRight">
+            <div class="inside">
+                <h1>Friends</h1>
+                <div class="users__container">
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+
+                </div>
+                <h1>Celebrities</h1>
+                <div class="users__container">
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+                    <div class="user">
+                        <img class="user__img" src="https://www.bootdey.com/app/webroot/img/Content/avatar/avatar1.png"
+                            alt="">
+                        <div class="user__name">Trần Văn Đời</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Tondu_Beta
+font link: https://www.fontspring.com/fonts/northern-block/tondu/tondu-beta
+font author: The Northern Block
+font author site: https://thenorthernblock.co.uk/
+
+
+{"bg":"transparent","icon-gradient-0":"#08C7D6","icon-gradient-1":"#02023E","font":"#000000","slogan":"#141414"}
+      

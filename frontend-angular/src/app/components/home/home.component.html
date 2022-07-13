@@ -52,6 +52,9 @@
             expand_more
         </mat-icon>
         <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="goToEditInfo()">
+                <mat-icon>settings</mat-icon>Edit Info
+            </button>
             <button mat-menu-item (click)="logout()">
                 <mat-icon>exit_to_app</mat-icon>Log out
             </button>

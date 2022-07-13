@@ -35,8 +35,8 @@ public class UserResource {
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
 	
-	@GetMapping("/findById/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+	@GetMapping("/findById")
+	public ResponseEntity<User> getUserById(@RequestParam("id") Long id) {
 		User user = userService.findUserById(id);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}

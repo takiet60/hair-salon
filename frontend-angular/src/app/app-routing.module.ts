@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { WatchComponent } from "./components/watch/watch.component";
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { EditInfoComponent } from './components/edit-info/edit-info.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,9 @@ const routes: Routes = [
   },
   {
     path: 'profile/:id', component: ProfileComponent,
+  },
+  {
+    path: 'editInfo', component: EditInfoComponent
   }
 ];
 
