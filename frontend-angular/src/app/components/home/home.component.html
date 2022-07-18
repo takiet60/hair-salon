@@ -4,8 +4,17 @@
             <img src="assets/images/cover.png" alt="logo" mat-card-avatar>
             <div class="input">
                 <mat-icon class="search-icon">search</mat-icon>
-                <form>
-                    <input type="text" placeholder="Search...">
+                <form class="form__search">
+                    <input type="text" name="search" placeholder="Search..." (keyup)="showHints()"
+                        [(ngModel)]="searchText">
+                    <div class="results" [class.show]="isShowSearchHint">
+                        <ul>
+                            <li *ngFor="let hint of searchHints" (click)="goToProfile(hint.id)">
+                                {{hint.firstName}}
+                                {{hint.lastName}}
+                            </li>
+                        </ul>
+                    </div>
                 </form>
             </div>
         </div>
@@ -35,7 +44,7 @@
                 <mat-icon>add</mat-icon>
             </div>
 
-            <div>
+            <div (click)="goToChatRoom()">
                 <mat-icon matBadge="4" matBadgeColor="warn" matBadgeOverlap="false" matBadgePosition="above after">
                     forum</mat-icon>
             </div>
@@ -52,6 +61,9 @@
             expand_more
         </mat-icon>
         <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="goToEditInfo()">
+                <mat-icon>settings</mat-icon>Edit Info
+            </button>
             <button mat-menu-item (click)="logout()">
                 <mat-icon>exit_to_app</mat-icon>Log out
             </button>
@@ -159,6 +171,18 @@
                             <span>{{ p?.time }}</span>
                             <h3>{{ p?.userName }}</h3>
                         </div>
+                        <mat-icon class="posts__setting" (click)="showEditBox()">settings</mat-icon>
+                        <mat-dialog-actions [class.active]="isShowEditbox">
+                            <mat-icon class="left" (click)="hideEditBox()">close</mat-icon>
+                            <div (click)="openEditPost(p.id)">
+                                <mat-icon>create</mat-icon>
+                                <p>Edit</p>
+                            </div>
+                            <div>
+                                <mat-icon>clear</mat-icon>
+                                <p>Remove</p>
+                            </div>
+                        </mat-dialog-actions>
                     </mat-card-header>
                     <mat-card-content class="posts__body">
                         <img [src]="p?.imgUrl" alt="" class="posts__img">

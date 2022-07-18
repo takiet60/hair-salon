@@ -10,6 +10,7 @@ import { Comment, IComment } from '../../models/comment.model';
 import { createHostListener } from '@angular/compiler/src/core';
 import { CommentService } from '../../services/comment.service';
 import { UserService } from '../../services/user.service';
+import { EditPostComponent } from '../edit-post/edit-post.component';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
   public users: any
 
   public posts: any
+  private editPost: any
 
   public allPosts: any
 
@@ -30,6 +32,12 @@ export class HomeComponent implements OnInit {
   public isCommentActive: boolean = false
   public commentModel: IComment = new Comment(0, 0, 0, '', '', '')
   public comments: IComment[]
+
+  public searchText: ''
+  public isShowSearchHint = false
+  public searchHints: IUser[]
+
+  public isShowEditbox: Boolean = false
 
 
   images: any[] = [
@@ -65,6 +73,24 @@ export class HomeComponent implements OnInit {
       })
   }
 
+  openEditPost(id: any) {
+    const dialogRef: MatDialogRef<EditPostComponent, any> = this.matDialog.open(
+      EditPostComponent,
+      {
+        role: 'dialog',
+        height: '580px',
+        width: '480px',
+      })
+
+    this.postService.getPostById(id).subscribe(
+      response => {
+        this.editPost = response
+        this.utilService.savePostToLocalStorage(this.editPost)
+      }
+    )
+
+  }
+
   showTopics() {
     this.postService.getAllPosts().subscribe(
       (response: any) => {
@@ -77,6 +103,31 @@ export class HomeComponent implements OnInit {
 
   showComments() {
     this.isCommentActive = !this.isCommentActive
+  }
+
+  showHints() {
+    if (this.searchText.length) {
+      this.isShowSearchHint = true
+      this.searchHints = this.users.filter(
+        (item) => {
+          return item.firstName.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            item.lastName.toLowerCase().includes(this.searchText.toLowerCase())
+        })
+
+
+      console.log(this.searchHints)
+    }
+    else {
+      this.isShowSearchHint = false
+    }
+  }
+
+  showEditBox() {
+    this.isShowEditbox = true
+  }
+
+  hideEditBox() {
+    this.isShowEditbox = false
   }
 
   updateLikes(likes: number, id: any, p: any) {
@@ -116,11 +167,14 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['profile', id]);
   }
 
+  goToChatRoom() {
+    this.router.navigate(['chat'])
+  }
+
   getAllUsers() {
     this.userService.getAllUsers().subscribe(
       (response) => {
         this.users = response
-        console.log(this.users)
       }
     )
   }
@@ -130,6 +184,10 @@ export class HomeComponent implements OnInit {
       (acc, val) => acc.concat(val), []
     )
     console.log(this.posts)
+  }
+
+  goToEditInfo() {
+    this.router.navigate(['/editInfo'])
   }
 
   logout() {

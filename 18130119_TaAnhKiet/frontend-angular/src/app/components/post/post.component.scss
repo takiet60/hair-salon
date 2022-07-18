@@ -1,0 +1,59 @@
+.create-article {
+  position: relative;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  mat-icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: #eee;
+    border-radius: 50%;
+
+    &:hover {
+      background-color: rgb(217, 215, 215);
+    }
+  }
+
+  .user-avatar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  textarea {
+    width: 100%;
+    font-size: large;
+    font-family: "Segoe UI Historic",
+      "Segoe UI",
+      Helvetica,
+      Arial,
+      sans-serif;
+  }
+
+  .submit {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin-top: 2rem;
+    background-color: #1877F2;
+    color: #fff;
+    border-radius: 1.5rem;
+    outline: none;
+    border: none;
+
+    &:hover {
+      opacity: .9;
+    }
+  }
+
+  .img-src {
+    width: 100%;
+    padding: 0.5em 1em;
+  }
+}

@@ -27,4 +27,16 @@ public class PostService {
 	public void updateLikes(int likes, long id) {
 		postRepo.updateLikes(likes, id);
 	}
+	
+	public List<Post> getPostsByUserId(long userId) {
+		return postRepo.getPostsByUserId(userId);
+	}
+	
+	public Post getPostById(long id) {
+		return postRepo.getPostById(id);
+	}
+	
+	public Post updatePost(Post post) {
+		return postRepo.save(post);
+	}
 }

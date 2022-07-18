@@ -42,7 +42,7 @@ public class UserService {
 	}
 	
 	public User findUserById(Long id) {
-		return userRepo.getById(id);
+		return userRepo.findById(id).get();
 //				.orElseThrow(() -> new UserNotFoundException("User by id:" + id + " was not found!"));
 	}
 	

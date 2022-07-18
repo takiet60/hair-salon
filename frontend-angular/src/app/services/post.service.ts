@@ -28,4 +28,12 @@ export class PostService {
   public getPostsByUserId(userId): Observable<IPost[]> {
     return this.httpClient.get<IPost[]>(`${this.apiUrl}/getByUserId?userId=${userId}`)
   }
+
+  public getPostById(id): Observable<IPost> {
+    return this.httpClient.get<Post>(`${this.apiUrl}/getById?id=${id}`)
+  }
+
+  public updatePost(post: IPost): Observable<IPost> {
+    return this.httpClient.post<Post>(`${this.apiUrl}/updatePost`, post)
+  }
 }

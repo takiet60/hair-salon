@@ -4,13 +4,16 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import vn.edu.socialplatform.model.User;
 
 public interface UserRepo extends JpaRepository<User, Long>{
 
 	public void deleteUserById(Long id);
-	public User getById(Long id);
+	
+	@Query(value = "SELECT u FROM User u WHERE u.id IN :id")
+	public User getById(@Param("id") Long id);
 	
 	@Query(value = "SELECT u FROM User u WHERE u.email IN :email")
 	public Optional<User> findByEmail(String email);

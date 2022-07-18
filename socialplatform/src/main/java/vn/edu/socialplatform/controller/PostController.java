@@ -44,4 +44,20 @@ public class PostController {
 		postService.updateLikes(likes, id);
 	}
 	
+	@GetMapping("/getByUserId")
+	public ResponseEntity<List<Post>> getPostsById(@RequestParam long userId) {
+		List<Post> listPosts = postService.getPostsByUserId(userId);
+		return new ResponseEntity<List<Post>>(listPosts, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getById")
+	public ResponseEntity<Post> getPostById(@RequestParam long id) {
+		Post newPost = postService.getPostById(id);
+		return new ResponseEntity<Post>(newPost, HttpStatus.OK);
+	}
+	
+	@PostMapping("/updatePost")
+	public ResponseEntity<Post> updatePost(@RequestBody Post post) {
+		return new ResponseEntity<Post>(postService.updatePost(post), HttpStatus.OK);
+	}
 }
