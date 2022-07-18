@@ -16,6 +16,8 @@ import { WatchComponent } from './components/watch/watch.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditInfoComponent } from './components/edit-info/edit-info.component';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 
@@ -29,7 +31,9 @@ import { EditInfoComponent } from './components/edit-info/edit-info.component';
     WatchComponent,
     PostComponent,
     ProfileComponent,
-    EditInfoComponent
+    EditInfoComponent,
+    EditPostComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

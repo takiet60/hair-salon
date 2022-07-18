@@ -49,4 +49,15 @@ public class PostController {
 		List<Post> listPosts = postService.getPostsByUserId(userId);
 		return new ResponseEntity<List<Post>>(listPosts, HttpStatus.OK);
 	}
+	
+	@GetMapping("/getById")
+	public ResponseEntity<Post> getPostById(@RequestParam long id) {
+		Post newPost = postService.getPostById(id);
+		return new ResponseEntity<Post>(newPost, HttpStatus.OK);
+	}
+	
+	@PostMapping("/updatePost")
+	public ResponseEntity<Post> updatePost(@RequestBody Post post) {
+		return new ResponseEntity<Post>(postService.updatePost(post), HttpStatus.OK);
+	}
 }

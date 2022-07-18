@@ -19,4 +19,7 @@ public interface PostRepo extends JpaRepository<Post, Long>{
 	
 	@Query(value = "SELECT p FROM Post p WHERE p.userId = :userId")
 	public List<Post> getPostsByUserId(@Param("userId") long userId);
+	
+	@Query(value = "SELECT p FROM Post p WHERE p.id = :id")
+	public Post getPostById(@Param("id") long id);
 }

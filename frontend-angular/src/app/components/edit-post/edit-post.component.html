@@ -1,0 +1,20 @@
+<section class="create-article">
+    <header>
+        <h4>Edit article</h4>
+
+    </header>
+    <mat-icon>close</mat-icon>
+    <form #form="ngForm">
+        <div class="user-avatar">
+            <img [src]="userModel.imgUrl" mat-card-avatar alt="">
+            <span class="name">{{ userModel.firstName }} {{ userModel.lastName }} </span>
+        </div>
+        <textarea name="" id="" cols="30" rows="10" name="content" [(ngModel)]="postModel.content">
+            {{postModel?.content}}
+        </textarea>
+        <p class="img-text">Image URL</p>
+        <input name="imgUrl" type="text" class="img-src" [(ngModel)]="postModel.imgUrl">
+
+        <button class="submit" (click)="editPost()" type="submit">Save</button>
+    </form>
+</section>

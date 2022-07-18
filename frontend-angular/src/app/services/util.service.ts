@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../models/user';
+import { IPost } from '../models/post.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,18 @@ export class UtilService {
   }
 
   public deleteUserInLocalStorage(key: string) {
+    localStorage.removeItem(key)
+  }
+
+  public savePostToLocalStorage(post: IPost) {
+    localStorage.setItem('post', JSON.stringify(post))
+  }
+
+  public getPostFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('post')) || {};
+  }
+
+  public deletePostInLocalStorage(key: string) {
     localStorage.removeItem(key)
   }
 
