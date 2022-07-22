@@ -33,6 +33,20 @@ export class UtilService {
     localStorage.removeItem(key)
   }
 
+  public getMinute() {
+    const now = new Date()
+
+    const hour = now.getHours().toString().length === 2
+      ? now.getHours()
+      : '0' + now.getHours()
+
+    const minute = now.getMinutes().toString().length == 2
+      ? now.getMinutes()
+      : '0' + now.getMinutes()
+
+    return `${hour}:${minute}`
+  }
+
   public getTimeNow() {
     const now = new Date()
     const date = now.getDate().toString().length === 2
